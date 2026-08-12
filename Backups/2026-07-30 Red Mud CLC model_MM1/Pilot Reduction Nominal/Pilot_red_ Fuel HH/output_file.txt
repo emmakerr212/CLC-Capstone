@@ -1,0 +1,24 @@
+                                                  value restriction
+Average conversion (CH4, H2, CO)  [0.627, 0.993, 0.966]       >0.85
+Gas velocity                                   0.221683    2.323108
+Remf                                          75.703278        <350
+Ar                                               556603    <5000000
+L/D                                            2.166667         2-6
+Cycle time                                    21.666667      15 min
+dp/R0                                          0.006667   0.04-0.25
+Pressure drop %                             1378.151283     <100000
+D/dp                                              300.0          >2
+Average OC conversion: 0.8544410321768169
+Min/Max conc: 0.0010852426070156853/10.846999857121775
+Min/Max temp: 1120.4166164022888/1148.844157323983
+Extracted heat (Reimann/trapezoid), J: -148384.63471177418/-161299.01188917374
+Accumulated heat (Reimann/trapezoid), J: 81679573.58519492/80525997.15671998
+total heat (Reimann/trapezoid): 81531.18895048315/80364.6981448308 kJ
+ fuel comp: [0.11, 0.18, 0.44, 0.14, 0.0001, 0.1299]
+ cFe2O3: 0.4928
+Design Variables:
+  tf: 1300
+  G (kg/m2/s): 0.058080884481156926
+  L: 3.1 (rounded)
+  Di: 1.5
+ Solve details:

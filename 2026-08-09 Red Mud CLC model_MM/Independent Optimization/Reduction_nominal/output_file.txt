@@ -1,0 +1,33 @@
+                                                 value restriction
+Average conversion (CH4, H2, CO)  [0.68, 0.996, 0.979]        >0.9
+Gas velocity                                  0.209662    2.246897
+Remf                                          74.46796        <350
+Ar                                              542603    <5000000
+L/D                                           2.066667         2-6
+Cycle time                                   21.666667      15 min
+dp/R0                                   0.005/(0.5*Di)   0.04-0.25
+Pressure drop %                               1.335972         <8%
+D/dp                                             300.0          >2
+Average OC conversion: 0.6413089777162359
+Min/Max conc: 0.0008890355071355366/10.846999857121775
+Min/Max temp: 1120.5878886494074/1149.0707027762535
+Extracted heat: -229.60949481189533
+Accumulated heat: 56855.97809362738
+total heat: 56626.36859881548 kJ
+ tf: 1300
+ fuel comp: [0.085, 0.14, 0.335, 0.14, 0.0001, 0.2999]
+ inlet flow rate (kg/m2/s): 0.05828607693676523
+ cFe2O3: 0.4928
+Design Variables:
+  tf: 1300
+  m_in (kg/s): 0.103
+  L: 3.1
+  Di: 1.5
+Objective Values:
+  Flow rate: 303.3021889292275
+  Heat: 5531.767030230953
+  Fuel: 469371.9493482856
+  CO2 avoided: 105518.77903276464
+  Capital: 23609.80054045716
+  OC: 4701.4527791490955
+  TAC: -387941.5244240488

@@ -1,0 +1,29 @@
+optimal operating parameters for the oxidation stage using the optimal design determined by the reduction stage
+ note the objective for this optimization does not consider capital or OC cost                         value restriction
+Gas velocity          0.147616    3.373628
+Remf                143.336551        <350
+Ar               702441.000000    <5000000
+L/D                   2.404040         2-6
+Cycle time           15      15 min
+dp/R0                 0.010101   0.04-0.25
+Pressure drop %       0.707076         <8%
+D/dp                198.000000          >2
+Average OC conversion: 0.9899756834771414
+Min/Max conc: 0.0012187274476786144/0.9749820262615502
+Min/Max temp: 1000.0/1056.97220448305
+Extracted heat: 0.01663147098893646
+Accumulated heat: 17.205469468350223
+total heat: 17.22210093933916 kW
+ cFe2O3: 0.4928
+Design Variables:
+  tf: 899.9999932148738
+  yO2: 0.0800000055893267
+  G: 0.052093555484821814
+  Di: 0.99
+  L: 2.38
+Objective Values:
+  Flow rate: 45.44462942487444
+  Heat: 2018.8894759686216
+  Reactor CAPEX: 5668.247847874862
+  OC Cost: 1147.6637006879405
+  TAC: 1973.4448465437472

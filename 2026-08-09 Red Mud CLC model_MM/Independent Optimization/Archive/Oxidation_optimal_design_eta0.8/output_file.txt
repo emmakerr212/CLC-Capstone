@@ -1,0 +1,28 @@
+                          value restriction
+Gas velocity           0.993102    2.067157
+Remf                  87.828035        <350
+Ar                       702441    <5000000
+L/D                    2.987854         2-6
+Cycle time            23.333333      15 min
+dp/R0            0.005/(0.5*Di)   0.04-0.25
+Pressure drop %       23.617614         <8%
+D/dp                 494.000005          >2
+Average OC conversion: 0.9552748726923287
+Min/Max conc: 0.0012187274476786144/2.5593277618662333
+Min/Max temp: 1000.0/1240.666826637134
+Extracted heat: 16.889125123743717
+Accumulated heat: 4440.3869109960515
+total heat: 4457.276036119795 kW
+ cFe2O3: 0.4928
+Design Variables:
+  tf: 1117.7872176699448
+  yO2: 0.21000000998920168
+  G: 0.35046582619871824
+  Di: 2.470000024666201
+  L: 7.3800000734734015
+Objective Values:
+  Flow rate: 64249.45167540405
+  Heat: 603559.0378789062
+  Reactor CAPEX: 80556.96949256379
+  OC Cost: 30348.56409983784
+  TAC: 428404.0526111005

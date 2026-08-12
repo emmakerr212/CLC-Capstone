@@ -1,0 +1,6 @@
+clc_des__param_L: design parameters 
+clc_gen__param: general parameters
+clc_ox__MS_pilot: pilot scale oxidation model (this is the one to run)
+clc_red__param: reduction specific parameters
+X_avg_calc: this calculates the average OC conversion by double integration (radial and axial) 
+(it's used to estimate cFe3O4 for oxidation)

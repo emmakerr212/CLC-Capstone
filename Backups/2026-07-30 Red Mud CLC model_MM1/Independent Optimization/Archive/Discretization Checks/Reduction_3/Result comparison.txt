@@ -1,0 +1,14 @@
+Design variables (new disc/thesis results)
+tf: 900/900
+m_in: 0.0103/0.0103
+L: 2.38/2.38
+D: 0.99/0.99
+
+Economics
+CO2: 8371.87/8327
+heat: 346.24/379.92
+dP: 3.79/3.79
+capital: 12265/12265
+OC: 1572.3/1572
+fuel: 36556.82/36557
+total: -41679.84 /-41646

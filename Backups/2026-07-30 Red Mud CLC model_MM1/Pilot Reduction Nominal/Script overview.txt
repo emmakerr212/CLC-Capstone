@@ -1,0 +1,4 @@
+clc_des__param_L: design parameters 
+clc_gen__param: general parameters
+clc_red__MS_RM_pilot_feas: pilot scale reduction model (this is the one to run)
+clc_red__param: reduction specific parameters (HFuel, HHFuel, LFuel, LLFuel correspond to those sensitivity analysis cases)

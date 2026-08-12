@@ -1,0 +1,22 @@
+                         value restriction
+Gas velocity          0.643740    2.067157
+Remf                 87.828035        <350
+Ar               702441.000000    <5000000
+L/D                   2.166667         2-6
+Cycle time           23.333333      15 min
+dp/R0                 0.006667   0.04-0.25
+Pressure drop %       5.433061         <8%
+D/dp                300.000000          >2
+Average OC conversion: 0.9843891663112235
+Min/Max conc: 0.0012187274476786144/2.1937308988485857
+Min/Max temp: 999.9997454341237/1139.3299087626758
+Extracted heat (Reimann/trapezoid), J: 7289453.041402102/7953043.1984079685
+Accumulated heat (Reimann/trapezoid), J: 481803006.229635/478874894.6939619
+total heat (Reimann/trapezoid): 489092.4592710371/486827.93789236987 kJ
+ cFe2O3: 0.3
+Design Variables:
+  tf: 1400
+  yO2: 0.18
+  G (kg/m2/s): 0.22717598730837535
+  Di: 1.5
+  L: 3.1 (rounded)
