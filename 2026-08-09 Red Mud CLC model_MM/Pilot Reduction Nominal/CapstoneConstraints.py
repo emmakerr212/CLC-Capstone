@@ -11,14 +11,12 @@ def checkCapstoneConstraints(LoD,tf,pdrop,X):
 
   Parameters
   ----------
-  L : Float???
-    Maximum length of reactor
-  D : Float???
-    Diameter of reactor
-  tf : Float???
-    residence time
+  LoD : Float
+    length over diameter of reactor
+  tf : Float
+    residence time in mins
   pdrop : float
-    Pressure drop
+    Pressure drop in %
   X : float
     Average conversion across reactor.
 
