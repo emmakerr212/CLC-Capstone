@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLC Compare</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="icon" href="/static/icon.ico" />
+  <script src="/vendor/plotly.min.js"></script>
+</head>
+<body class="app-page">
+
+{% include '_header.html' %}
+
+<main class="grid">
+
+  <section class="panel runs-panel" id="panelRuns" style="grid-row: 1 / span 2">
+    <div class="panel-header">
+      <span class="panel-icon">📂</span>
+      <h2>Runs</h2>
+      <div class="panel-header-actions">
+        <button class="btn-sm" id="btnClear" title="Remove all">✕ Clear</button>
+        <button class="btn-sm" id="btnRefresh" title="Re-read the folder">↻ Refresh</button>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="runs-tools">
+        <input class="search-input" id="runSearch" type="search" placeholder="Filter by name, date, status…" />
+        <div class="chip-row" id="kindChips"></div>
+        <div class="runs-meta"><span id="runsCount"></span><span>max. 4 runs</span></div>
+      </div>
+      <div class="results-table-wrap">
+        <table class="results-table runs-table">
+          <thead><tr><th class="check-cell"></th><th>Date</th><th>Type</th><th>Status</th></tr></thead>
+          <tbody id="runsBody"><tr><td colspan="4" class="results-empty">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel panel-main" id="panelMain">
+    <div class="panel-header">
+      <span class="panel-icon">⚖</span>
+      <h2>Comparison</h2>
+      <div class="panel-header-actions">
+        <label class="kbd-hint">Outlet species <select class="panel-select" id="selSpecies"></select></label>
+        <label class="kbd-hint">Solid <select class="panel-select" id="selSolid"></select></label>
+        <button class="btn-icon-only" data-expand="panelMain" title="Expand">⤢</button>
+      </div>
+    </div>
+    <div class="panel-body plots-body">
+      <div class="run-report-empty" id="mainEmpty"><span class="ph-icon">⚖</span><p>Check 2 to 4 runs in the list.</p></div>
+      <div id="cmpContent" hidden>
+        <div class="cmp-legend" id="cmpLegend"></div>
+        <div class="plot-grid">
+          <div class="plot-card"><div class="plot-card-head"><h3>Outlet temperature</h3><span class="plot-sub">bulk T at z = L</span></div><div class="plot" id="cmpTout"></div></div>
+          <div class="plot-card"><div class="plot-card-head"><h3>Outlet concentration</h3><span class="plot-sub" id="subCout"></span></div><div class="plot" id="cmpCout"></div></div>
+          <div class="plot-card"><div class="plot-card-head"><h3>Inlet mass flow</h3><span class="plot-sub">total, kg/s</span></div><div class="plot" id="cmpFlow"></div></div>
+          <div class="plot-card"><div class="plot-card-head"><h3>Solid inventory</h3><span class="plot-sub" id="subSolidAvg"></span></div><div class="plot" id="cmpSolid"></div></div>
+          <div class="plot-card wide">
+            <div class="plot-card-head"><h3>Parameters</h3><span class="plot-sub">highlighted in amber: what differs between runs</span></div>
+            <div style="padding: 8px 10px 10px; overflow:auto">
+              <table class="results-table cmp-table" id="cmpTable"></table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="/static/js/common.js"></script>
+<script src="/static/js/compare.js"></script>
+</body>
+</html>

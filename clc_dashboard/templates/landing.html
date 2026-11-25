@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLC Dashboard</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="icon" href="/static/icon.ico" />
+</head>
+<body class="landing-page">
+
+{% include '_header.html' %}
+
+<main class="landing-main">
+  <section class="landing-group">
+    <div class="landing-group-head">
+      <h2>Where to go</h2>
+      <p>Everything is read from the H5 files each notebook exports; a new run shows up without restarting the server.</p>
+    </div>
+    <div class="landing-grid">
+
+      <a class="landing-card landing-card-primary" href="/explorer">
+        <span class="landing-card-icon">🔬</span>
+        <h3>Run explorer</h3>
+        <p>One run in depth: axial profiles of gas, solid, temperature and conversion with time and
+           particle-radius sliders, z–t maps, bed-outlet time series, and a summary of parameters
+           and decisions.</p>
+        <span class="landing-card-meta">format 2 · format 1 · legacy (Jun–Jul)</span>
+        <span class="landing-card-cta">Open explorer →</span>
+      </a>
+
+      <a class="landing-card" href="/compare">
+        <span class="landing-card-icon">⚖</span>
+        <h3>Compare runs</h3>
+        <p>Up to four runs overlaid against global time — outlet T and concentration, inlet flow,
+           solid inventory — plus a parameter table that highlights what changes.</p>
+        <span class="landing-card-meta">shared time axis, fixed color per run</span>
+        <span class="landing-card-cta">Open →</span>
+      </a>
+
+      <a class="landing-card" href="/tables">
+        <span class="landing-card-icon">▦</span>
+        <h3>Model tables</h3>
+        <p>Every indexed component of the Pyomo model — variables, expressions, parameters,
+           constraints with residuals and duals — as spreadsheet tables, in long or pivot form,
+           scaled or in physical units. Copy to Excel or download as CSV.</p>
+        <span class="landing-card-meta">needs the full model export (/modelo in the H5)</span>
+        <span class="landing-card-cta">Open →</span>
+      </a>
+
+      <div class="landing-card landing-card-future">
+        <span class="landing-card-icon">🧭</span>
+        <h3>Initializations</h3>
+        <p>Inspect warm starts and initializations before solving: which H5 each stage comes from
+           and how the initial point compares with the solution.</p>
+        <span class="landing-card-meta">planned</span>
+        <span class="landing-card-cta">Coming soon</span>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="landing-group">
+    <div class="landing-group-head">
+      <h2>Runs</h2>
+      <p>{{ n_runs }} files in the results folder{% if latest %}; the most recent is from {{ latest.date.replace('T', ' ') }}{% endif %}.</p>
+    </div>
+    <div class="stat-row">
+      {% set labels = [('cycle','Full cycle'),('oxpurge','Ox + Purge'),('ox','Oxidation'),('purge','Purge'),('red','Reduction'),('error','Unreadable')] %}
+      {% for key, label in labels %}{% if by_kind.get(key) %}
+      <a class="kpi-tile {% if key == 'error' %}is-warn{% endif %}" href="/explorer?kind={{ key }}" style="text-decoration:none">
+        <div class="kpi-label">{{ label }}</div>
+        <div class="kpi-value">{{ by_kind[key] }}</div>
+      </a>
+      {% endif %}{% endfor %}
+    </div>
+    <p class="landing-path">{{ runs_dir }}</p>
+  </section>
+</main>
+
+</body>
+</html>

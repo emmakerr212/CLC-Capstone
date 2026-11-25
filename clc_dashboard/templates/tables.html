@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLC Tables</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="icon" href="/static/icon.ico" />
+</head>
+<body class="app-page">
+
+{% include '_header.html' %}
+
+<main class="grid">
+
+  <!-- ═══ Runs (only those with the full model export) ═══ -->
+  <section class="panel runs-panel" id="panelRuns">
+    <div class="panel-header">
+      <span class="panel-icon">📂</span>
+      <h2>Runs</h2>
+      <div class="panel-header-actions">
+        <button class="btn-sm" id="btnRefresh" title="Re-read the folder (also checked automatically every 15 s)">↻ Refresh</button>
+        <button class="btn-icon-only" data-expand="panelRuns" title="Expand">⤢</button>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="runs-tools">
+        <input class="search-input" id="runSearch" type="search" placeholder="Filter by name, date, status…" />
+        <div class="chip-row" id="kindChips"></div>
+        <div class="runs-meta"><span id="runsCount"></span><span>only runs with the full model export</span></div>
+      </div>
+      <div class="results-table-wrap">
+        <table class="results-table runs-table">
+          <thead><tr><th>Date</th><th>Type</th><th>Status</th></tr></thead>
+          <tbody id="runsBody"><tr><td colspan="3" class="results-empty">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Components ═══ -->
+  <section class="panel runs-panel" id="panelComps">
+    <div class="panel-header">
+      <span class="panel-icon">🧩</span>
+      <h2>Components</h2>
+      <div class="panel-header-actions">
+        <select class="panel-select" id="compStage" title="Stage"></select>
+        <button class="btn-icon-only" data-expand="panelComps" title="Expand">⤢</button>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="runs-tools">
+        <input class="search-input" id="compSearch" type="search" placeholder="Search name or description… (/ to focus)" />
+        <div class="chip-row" id="typeChips"></div>
+        <div class="runs-meta"><span id="compCount"></span><span id="compMeta"></span></div>
+      </div>
+      <div class="results-table-wrap">
+        <table class="results-table runs-table comp-table">
+          <thead><tr><th>Name</th><th>Type</th><th style="text-align:right">n</th></tr></thead>
+          <tbody id="compBody"><tr><td colspan="3" class="results-empty">Pick a run.</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Table ═══ -->
+  <section class="panel panel-main" id="panelMain">
+    <div class="panel-header">
+      <span class="panel-icon">▦</span>
+      <h2 id="tblTitle">Table</h2>
+      <span class="plot-sub" id="tblSubtitle"></span>
+      <div class="panel-header-actions">
+        <button class="btn-sm" id="btnCopy" title="Copy the whole table (all pages) as tab-separated text, ready to paste into Excel">⧉ Copy for Excel</button>
+        <button class="btn-sm btn-load" id="btnCsv" title="Download the whole table as CSV, full precision">⬇ CSV</button>
+        <button class="btn-icon-only" data-expand="panelMain" title="Expand">⤢</button>
+      </div>
+    </div>
+
+    <div class="sheet-tabs" id="sheetTabs"></div>
+
+    <div class="toolbar" id="toolbar">
+      <div class="tool-group">
+        <span class="tool-label">View</span>
+        <div class="cfg-tabs" id="segView">
+          <button class="cfg-tab active" data-v="long">Long</button>
+          <button class="cfg-tab" data-v="pivot">Pivot</button>
+          <button class="cfg-tab" data-v="breakdown" title="Terms of the formula (e.g. the objective function), evaluated and checked against Pyomo">Breakdown</button>
+        </div>
+      </div>
+      <div class="tool-group">
+        <span class="tool-label">Values</span>
+        <div class="cfg-tabs" id="segValues">
+          <button class="cfg-tab" data-v="pyomo" title="Value exactly as it is in Pyomo (scaled / dimensionless)">Pyomo</button>
+          <button class="cfg-tab" data-v="phys" title="Value in physical units">Physical</button>
+          <button class="cfg-tab active" data-v="both">Both</button>
+        </div>
+      </div>
+      <div class="tool-group">
+        <span class="tool-label">Indices</span>
+        <div class="cfg-tabs" id="segIdx">
+          <button class="cfg-tab" data-v="nd" title="Index points as in Pyomo (0…1)">Dimensionless</button>
+          <button class="cfg-tab active" data-v="phys" title="z in m, r in m, t in s">Physical</button>
+        </div>
+      </div>
+      <div class="tool-group">
+        <span class="tool-label">Compare with</span>
+        <select class="panel-select cmp-select" id="selCmp" title="Compare this table with the same component in another run"></select>
+      </div>
+      <div class="tool-group">
+        <span class="tool-label">Digits</span>
+        <select class="panel-select" id="selDigits">
+          <option value="4">4</option><option value="6" selected>6</option><option value="10">10</option><option value="full">full</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="comp-info" id="compInfo"></div>
+    <div class="formula" id="formula"></div>
+    <div class="toolbar toolbar-sub" id="toolbarSub"></div>
+
+    <div class="panel-body table-body" id="tableBody">
+      <div class="run-report-empty"><span class="ph-icon">▦</span><p>Pick a run, then a component.</p></div>
+    </div>
+    <div class="pager" id="pager"></div>
+  </section>
+
+</main>
+
+<script src="/static/js/common.js"></script>
+<script src="/static/js/tables.js"></script>
+</body>
+</html>

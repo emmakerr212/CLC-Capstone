@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLC Explorer</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="icon" href="/static/icon.ico" />
+  <script src="/vendor/plotly.min.js"></script>
+</head>
+<body class="app-page">
+
+{% include '_header.html' %}
+
+<main class="grid">
+
+  <!-- ═══ Runs ═══ -->
+  <section class="panel runs-panel" id="panelRuns">
+    <div class="panel-header">
+      <span class="panel-icon">📂</span>
+      <h2>Runs</h2>
+      <div class="panel-header-actions">
+        <button class="btn-sm" id="btnRefresh" title="Re-read the folder (also checked automatically every 15 s)">↻ Refresh</button>
+        <button class="btn-icon-only" data-expand="panelRuns" title="Expand">⤢</button>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="runs-tools">
+        <input class="search-input" id="runSearch" type="search" placeholder="Filter by name, date, status…" />
+        <div class="chip-row" id="kindChips"></div>
+        <div class="runs-meta"><span id="runsCount"></span><span id="runsUpdated"></span></div>
+      </div>
+      <div class="results-table-wrap">
+        <table class="results-table runs-table">
+          <thead><tr><th>Date</th><th>Type</th><th>Status</th></tr></thead>
+          <tbody id="runsBody"><tr><td colspan="3" class="results-empty">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Summary ═══ -->
+  <section class="panel" id="panelSummary">
+    <div class="panel-header">
+      <span class="panel-icon">📋</span>
+      <h2>Summary</h2>
+      <div class="panel-header-actions">
+        <button class="btn-icon-only" data-expand="panelSummary" title="Expand">⤢</button>
+      </div>
+    </div>
+    <div class="panel-body" id="summaryBody">
+      <div class="run-report-empty"><span class="ph-icon">📋</span><p>Pick a run from the list.</p></div>
+    </div>
+  </section>
+
+  <!-- ═══ Profiles / maps / outlet ═══ -->
+  <section class="panel panel-main" id="panelMain">
+    <div class="panel-header">
+      <span class="panel-icon">📈</span>
+      <div class="cfg-tabs" id="viewTabs">
+        <button class="cfg-tab active" data-view="profiles">Profiles in z</button>
+        <button class="cfg-tab" data-view="map">z–t map</button>
+        <button class="cfg-tab" data-view="outlet">Bed outlet</button>
+      </div>
+      <div class="panel-header-actions">
+        <span class="kbd-hint"><kbd>←</kbd><kbd>→</kbd> time · <kbd>↑</kbd><kbd>↓</kbd> radius · <kbd>space</kbd> play</span>
+        <button class="btn-icon-only" data-expand="panelMain" title="Expand">⤢</button>
+      </div>
+    </div>
+
+    <div class="controls" id="controls">
+      <div>
+        <div class="ctrl-label">
+          <span>Time</span>
+          <span class="stage-pill" id="tStage"></span>
+          <span class="ctrl-value" id="tValue">—</span>
+          <span class="ctrl-sub" id="tSub"></span>
+        </div>
+        <div class="ctrl-row">
+          <button class="btn-icon-only" id="btnPrev" title="Previous step (←)">‹</button>
+          <button class="btn-icon-only" id="btnPlay" title="Play (space)">▶</button>
+          <button class="btn-icon-only" id="btnNext" title="Next step (→)">›</button>
+          <input type="range" id="tSlider" min="0" max="0" step="1" value="0" />
+        </div>
+        <div class="stage-strip" id="stageStrip"></div>
+        <div class="stage-labels" id="stageLabels"></div>
+      </div>
+      <div>
+        <div class="ctrl-label">
+          <span>Radial position</span>
+          <span class="ctrl-value" id="rValue">—</span>
+        </div>
+        <div class="ctrl-row">
+          <input type="range" id="rSlider" min="0" max="0" step="1" value="0" />
+        </div>
+        <div class="tick-row"><span>center</span><span>surface</span><span><b>Bulk</b></span></div>
+      </div>
+    </div>
+
+    <div class="panel-body plots-body" id="plotsBody">
+      <div class="run-report-empty" id="mainEmpty"><span class="ph-icon">📈</span><p>Pick a run from the list to see its profiles.</p></div>
+
+      <div class="view active" data-view="profiles">
+        <div class="plot-grid">
+          <div class="plot-card"><div class="plot-card-head"><h3>Gas</h3><span class="plot-sub" id="subGas"></span></div><div class="plot" id="plotGas"></div></div>
+          <div class="plot-card"><div class="plot-card-head"><h3>Solid</h3><span class="plot-sub" id="subSolid"></span></div><div class="plot" id="plotSolid"></div><div class="plot-note" id="noteSolid" hidden></div></div>
+          <div class="plot-card"><div class="plot-card-head"><h3>Temperature</h3><span class="plot-sub" id="subTemp"></span></div><div class="plot" id="plotTemp"></div></div>
+          <div class="plot-card"><div class="plot-card-head"><h3>Solid conversion</h3><span class="plot-sub" id="subConv"></span></div><div class="plot" id="plotConv"></div><div class="plot-note" id="noteConv" hidden></div></div>
+          <div class="plot-card wide"><div class="plot-card-head"><h3>Inlet mass flow</h3><span class="plot-sub">vs global time · the line marks the slider's t</span></div><div class="plot" id="plotFlow"></div><div class="plot-note" id="noteFlow" hidden></div></div>
+        </div>
+      </div>
+
+      <div class="view" data-view="map">
+        <div class="plot-grid">
+          <div class="plot-card wide">
+            <div class="plot-card-head">
+              <h3>z–t map</h3><span class="plot-sub" id="subMap"></span>
+              <select class="panel-select" id="mapVar"></select>
+            </div>
+            <div class="plot tall" id="plotMap"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="view" data-view="outlet">
+        <div class="plot-grid">
+          <div class="plot-card wide"><div class="plot-card-head"><h3>Outlet gas</h3><span class="plot-sub" id="subOutGas"></span>
+            <select class="panel-select" id="outScale"><option value="linear">Linear scale</option><option value="log">Log scale</option></select></div><div class="plot" id="plotOutGas"></div></div>
+          <div class="plot-card wide"><div class="plot-card-head"><h3>Outlet temperature</h3><span class="plot-sub" id="subOutT"></span></div><div class="plot" id="plotOutT"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="/static/js/common.js"></script>
+<script src="/static/js/explorer.js"></script>
+</body>
+</html>

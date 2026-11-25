@@ -1,0 +1,20 @@
+<header class="header">
+  <div class="header-left">
+    <span class="header-icon">⚗</span>
+    <div style="min-width:0">
+      <h1><a href="/">Chemical Looping Combustion</a></h1>
+      <p class="header-sub" id="headerSub">{{ subtitle | default('Fe₂O₃/Fe₃O₄ packed bed — oxidation · purge · reduction') }}</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <nav class="header-nav cfg-tabs">
+      <a class="cfg-tab {% if page == 'home' %}active{% endif %}" href="/">Home</a>
+      <a class="cfg-tab {% if page == 'explorer' %}active{% endif %}" href="/explorer">Explorer</a>
+      <a class="cfg-tab {% if page == 'compare' %}active{% endif %}" href="/compare">Compare</a>
+      <a class="cfg-tab {% if page == 'tables' %}active{% endif %}" href="/tables">Tables</a>
+    </nav>
+    {% if page != 'home' %}
+    <div class="status-badge" id="statusBadge"><span class="status-dot"></span><span id="statusText">No run</span></div>
+    {% endif %}
+  </div>
+</header>
